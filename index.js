@@ -6,6 +6,8 @@ const dbName = './db.txt';
 
 const app = express();
 
+app.use(express.json());
+
 let db = [];
 function cargarDb() {
     try {
@@ -45,8 +47,33 @@ app.get('/:id', (request, response) => {
             { mensaje: 'No se encontro el usuario' }
         )
     }
-    
+
     return response.json(resultado);
+});
+
+app.post('/estudiante', (request, response) => {
+    const { body } = request;
+    if (!body.nombre) {
+        return response.status(400).json({
+            mensaje: 'Campo nombre no esta presente',
+            ok: false
+        });
+    }
+
+    if (body.nombre.length < 3) {
+        return response.status(400).json({
+            mensaje: 'Nombre debe tener 3 o más letras',
+            ok: false
+        });
+    }
+    const ultimoId = db[db.length - 1]?.id || 0;
+    const nuevoEstudiante = {
+        id: ultimoId + 1,
+        ...request.body
+    };
+    db.push(nuevoEstudiante);
+    guardarDb();
+    return response.status(201).json({ id: nuevoEstudiante.id });
 });
 
 app.listen(puerto, async () => {

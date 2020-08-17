@@ -1,11 +1,1 @@
-[
-    {"id": 1, "nombre": "Codealo"},
-    {"id": 2, "nombre": "John"},
-    {"id": 3, "nombre": "Maria"},
-    {"id": 4, "nombre": "Maria Fernanda"},
-    {"id": 5, "nombre": "Julian"},
-    {"id": 6, "nombre": "Andrea"},
-    {"id": 7, "nombre": "Andres"},
-    {"id": 8, "nombre": "Nestor"},
-    {"id": 9, "nombre": "Bruno"}
-]
+[{"id":1,"nombre":"Codealo"},{"id":2,"nombre":"John"},{"id":3,"nombre":"Maria"},{"id":4,"nombre":"Maria Fernanda"},{"id":5,"nombre":"Julian"},{"id":6,"nombre":"Andrea"},{"id":7,"nombre":"Andres"},{"id":8,"nombre":"Nestor"},{"id":9,"nombre":"Bruno"},{"id":10,"nombre":"Santiago"},{"id":11,"nombre":"Micaela"}]
