@@ -76,6 +76,49 @@ app.post('/estudiante', (request, response) => {
     return response.status(201).json({ id: nuevoEstudiante.id });
 });
 
+app.put('/estudiante/:id', (request, response) => {
+    const { id } = request.params;
+    let estudiante = db.find(estudiante => {
+        return estudiante.id == id;
+    });
+
+    if (!estudiante) {
+        return response.status(404).json({
+            mensaje: 'Estudiante no existe'
+        });
+    }
+
+    const { nombre } = request.body;
+    if (!nombre) {
+        return response.status(400).json({
+            ok: false,
+            mensaje: 'Debes incluir el nombre'
+        });
+    }
+
+    estudiante.nombre = nombre;
+    guardarDb();
+    return response.json(estudiante);
+});
+
+app.delete('/estudiante/:id', (request, response) => {
+    const { id } = request.params;
+    let index = db.findIndex(estudiante => {
+        return estudiante.id == id;
+    })
+
+    if (index < 0) {
+        return response.status(404).json({
+            mensaje: 'No se encontro ese estudiante',
+            ok: false
+        })
+    }
+
+    db.splice(index, 1);
+    guardarDb();
+    return response.status(200).json({ id });
+})
+
 app.listen(puerto, async () => {
     cargarDb()
     return console.log(`Estamos en el puerto ${puerto}`);
